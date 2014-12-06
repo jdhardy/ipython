@@ -26,7 +26,7 @@ from IPython.utils.process import (find_cmd, FindCmdError, arg_split,
 from IPython.testing import decorators as dec
 from IPython.testing import tools as tt
 
-python = os.path.basename(sys.executable)
+python = sys.executable
 
 #-----------------------------------------------------------------------------
 # Tests
