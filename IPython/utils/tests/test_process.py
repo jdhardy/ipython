@@ -51,7 +51,7 @@ def has_pywin32():
 @dec.onlyif(has_pywin32, "This test requires win32api to run")
 def test_find_cmd_pythonw():
     """Try to find pythonw on Windows."""
-    path = find_cmd('pythonw')
+    path = python.replace('python.exe', 'pythonw.exe')
     nt.assert_true(path.endswith('pythonw.exe'))
 
 
