@@ -141,7 +141,12 @@ HOME = py3compat.str_to_unicode(
 
 # This is needed on FreeBSD, and maybe other systems which symlink /home to
 # /usr/home, but retain the $HOME variable as pointing to /home
-HOME = os.path.realpath(HOME)
+try:
+    HOME = os.path.realpath(HOME)
+except ValueError:
+    # IronPython is too strict validating directories
+    # https://ironpython.codeplex.com/workitem/29489
+    pass
 
 # We precompute a few more strings here for the prompt_specials, which are
 # fixed once ipython starts.  This reduces the runtime overhead of computing
