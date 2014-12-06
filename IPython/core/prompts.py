@@ -135,7 +135,9 @@ def multiple_replace(dict, text):
 # - I also need to split up the color schemes from the prompt specials
 # somehow.  I don't have a clean design for that quite yet.
 
-HOME = py3compat.str_to_unicode(os.environ.get("HOME","//////:::::ZZZZZ,,,~~~"))
+HOME = py3compat.str_to_unicode(
+    os.environ.get("HOME",
+        os.environ.get("USERPROFILE", "//////:::::ZZZZZ,,,~~~")))
 
 # This is needed on FreeBSD, and maybe other systems which symlink /home to
 # /usr/home, but retain the $HOME variable as pointing to /home
@@ -144,7 +146,7 @@ HOME = os.path.realpath(HOME)
 # We precompute a few more strings here for the prompt_specials, which are
 # fixed once ipython starts.  This reduces the runtime overhead of computing
 # prompt strings.
-USER           = py3compat.str_to_unicode(os.environ.get("USER",''))
+USER           = py3compat.str_to_unicode(os.environ.get("USER", os.environ.get("USERNAME", '')))
 HOSTNAME       = py3compat.str_to_unicode(socket.gethostname())
 HOSTNAME_SHORT = HOSTNAME.split(".")[0]
 ROOT_SYMBOL    = "#" if (os.name=='nt' or os.getuid()==0) else "$"
